@@ -1,0 +1,30 @@
+
+stages:
+  - test-release
+  - product-release
+
+
+copying:
+  only:
+    - master
+  stage: test-release
+  script:
+    # 先复制除了html之外的所有文件
+    - 'lftp -e "mirror -R --exclude-glob *.html ./partner/home/ /html/partner/home; quit" -u zhibostatic,zhibostatic123 10.0.202.114'
+    # 等5秒钟，因为生产服务器两台之间同步也要花些时间。
+    - 'sleep 5'
+    # 再复制html文件
+    - 'lftp -e "mirror -R --include-glob *.html ./partner/home/ /html/partner/home; quit" -u zhibostatic,zhibostatic123 10.0.202.114'
+
+pcopying:
+  only:
+    - master
+  stage: product-release
+  when: manual
+  script:
+  # 先复制除了html之外的所有文件
+  - 'lftp -e "mirror -R --exclude-glob *.html ./partner/home/ /partner/home; quit" -u jiamingyu,jiazhibo20161030 10.4.12.156'
+  # 等5秒钟，因为生产服务器两台之间同步也要花些时间。
+  - 'sleep 5'
+  # 再复制html文件
+  - 'lftp -e "mirror -R --include-glob *.html ./partner/home/ /partner/home; quit" -u jiamingyu,jiazhibo20161030 10.4.12.156'

@@ -1,0 +1,159 @@
+// reset.scss
+body, ul, li, P, h1, h2, h3, h4, h5{
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+// a标签去下划线
+a:link {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+a:active {
+  text-decoration: none;
+}
+
+input, button {
+  border: none;
+  outline: none;
+
+}
+
+img {
+  border none
+}
+
+
+.no-select {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+  // 字体设置
+.icon {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+//  分页按钮
+.pageContainer {
+  display flex
+  justify-content center
+  align-items center
+  li {
+    border 1px solid #e5e5e5
+    display flex
+    justify-content center
+    align-items center
+    a {
+      flex 1
+      cursor pointer
+      padding 5px 10px
+    }
+  }
+}
+.pagination {
+  display flex
+  justify-content center
+  align-items center
+  li {
+    // display flex
+    justify-content center
+    align-items center
+    a {
+      flex 1
+      display flex
+      // display block
+      cursor pointer
+      padding 5px 10px
+      border 1px solid #e5e5e5
+      margin 0 5px
+      text-align center
+    }
+    a:link {
+      text-decoration: none;
+      color black
+    }
+    a:visited {
+      text-decoration: none;
+      color black
+    }
+    a:hover {
+      text-decoration: none;
+      color black
+    }
+    a:active {
+      text-decoration: none;
+      color black
+      outline none
+    }
+  }
+  .active {
+    a {
+      color #0091ff
+      border 1px solid #0091ff
+    }
+  }
+}
+
+//标的
+  .menu-header-tips{
+      background #fff
+      padding 20px 10px
+      display flex
+      width 240px
+      box-shadow -0px -0px 1px 1px #b6b6b6,0px 0px 1px 1px #b6b6b6
+      transition opacity .15s
+      top 30px !important
+
+      .tooltip-inner {
+        display flex
+        width 240px
+        justify flex-start
+        flex-wrap wrap
+      }
+      span {
+        font-size 12px
+        padding 5px 10px
+        background #2c9cde
+        margin 5px 
+        border-radius 5px
+        display block
+        color #fff
+      }
+    }
+
+    .menu-header-tips:after, .menu-header-tips:before {
+      border solid transparent
+      content ' '
+      height 0
+      left 100%
+      position absolute
+      width 0
+    }
+
+    .menu-header-tips:after {
+      border-width 12px
+      border-bottom-color #fff
+      top -24px
+      left 120px
+      
+    }
+
+    .menu-header-tips:before {
+      border-width 14px
+      border-bottom-color #b6b6b6
+      top -28px
+      left 118px
+    }
