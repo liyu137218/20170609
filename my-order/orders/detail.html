@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>订单详情</title>
+    <!--<base href="http://imgcd.hexun.com/home/orders/" />-->
+    <script type="text/javascript" src="http://imgcd.hexun.com/home/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src='http://imgcd.hexun.com/home/js/dist/lib.js'></script>
+    <link rel="stylesheet" type="text/css" href="http://imgcd.hexun.com/home/css/public.css">
+    <link rel="stylesheet" type="text/css" href="http://imgcd.hexun.com/home/css/pubRight.css">
+    <link rel="stylesheet" type="text/css" href="http://imgcd.hexun.com/home/css/pubStyle.css">
+    <script src="js/myOrderOne.js"></script>
+    <style type="text/css">
+    .wrapbox1 {
+        overflow: hidden;
+        display: none;
+        width: 490px;
+        margin: 0px auto;
+        background: #fff;
+        position: fixed;
+        font-size: 16px;
+        border-radius: 12px;
+    }
+
+    .wrapTit1 {
+        position: relative;
+        padding: 30px 0 30px 20px;
+        height: 35px;
+        line-height: 35px;
+        font: 16px/0px 'microsoft yahei';
+        color: #333;
+        border-bottom: solid 1px #eee;
+    }
+
+    .wrapTit1 p {
+        margin: 0;
+    }
+
+    .info1 {
+        padding: 30px 0px 40px 30px;
+    }
+
+    .info1 .warning {
+        display: inline-block;
+        margin-right: 20px;
+        width: 24px;
+        height: 24px;
+        background: url(http://imgcd.hexun.com/teacher/images/article/tc.png) no-repeat 0 0;
+        vertical-align: top;
+    }
+
+    .c-red {
+        color: #ee5050;
+        cursor: pointer;
+    }
+    </style>
+    <!--     <script type="text/javascript" src="http://utrack.hexun.com/dp/hexun_dplus_ver1.0.3.js"></script> -->
+</head>
+
+<body>
+    <div class="wrapbox1" id="browserInfo">
+        <div class="wrapTit1">
+            <p class='no-margin'>提示</p>
+            <a class="wrap-close1" onclick="close_tips('browserInfo')"></a>
+        </div>
+        <p class='info1'><i class='warning'></i>您的浏览器太老旧了.【<span onclick="download()" class='c-red'>我们推荐使用chrome浏览器</span>】</p>
+    </div>
+    <script type="text/javascript">
+    var center_tips = function(idname) {
+        var isIE = (window.attachEvent) ? true : false;
+        var isIE6 = isIE && ([/MSIE (\d)\.0/i.exec(navigator.userAgent)][0][1] == 6);
+        var newbox = document.getElementById(idname);
+        newbox.style.zIndex = "9999";
+        newbox.style.display = "block";
+        if (!isIE6) {
+            newbox.style.marginTop = -newbox.offsetHeight / 2 + "px";
+            newbox.style.marginLeft = -newbox.offsetWidth / 2 + "px";
+            newbox.style.top = newbox.style.left = "50%";
+        }
+        var layer = document.getElementById("layer");
+        if (!layer) {
+            layer = document.createElement("div");
+            layer.id = "layer";
+            layer.style.width = layer.style.height = "100%";
+            layer.style.position = !isIE6 ? "fixed" : "absolute";
+            layer.style.top = layer.style.left = 0;
+            document.body.appendChild(layer);
+        }
+        layer.style.backgroundColor = "#000";
+        layer.style.zIndex = "9998";
+        layer.style.opacity = "0.7";
+        layer.style.display = "";
+        var sel = document.getElementsByTagName("select");
+        for (var i = 0; i < sel.length; i++) {
+            sel[i].style.visibility = "hidden";
+        }
+        var nowsel = newbox.getElementsByTagName("select");
+        for (var i = 0; i < nowsel.length; i++) {
+            nowsel[i].style.visibility = "visible";
+        }
+
+        function layer_iestyle() {
+            layer.style.width = Math.max(document.documentElement.scrollWidth, document.documentElement.clientWidth) + "px";
+            layer.style.height = Math.max(document.documentElement.scrollHeight, document.documentElement.clientHeight) + "px";
+        }
+        if (isIE) {
+            layer.style.filter = "alpha(opacity=70)";
+        }
+        if (isIE6) {
+            layer_iestyle();
+            window.attachEvent("onresize", layer_iestyle)
+        }
+    }
+
+    var close_tips = function(boxId) {
+        var newbox = document.getElementById(boxId);
+        newbox.style.display = "none";
+        var layer = document.getElementById('layer') ? document.getElementById('layer') : null;
+        if (layer) {
+            layer.style.display = "none";
+        }
+        var sel = document.getElementsByTagName("select");
+        for (var i = 0; i < sel.length; i++) {
+            sel[i].style.visibility = "visible";
+        }
+    }
+
+    function download() {
+        window.open('https://www.google.cn/chrome/browser/desktop/index.html');
+    }
+    var ua = navigator.userAgent.toLowerCase(),
+        isie = /(msie)/ig,
+        ie8 = /msie\s8.0/ig,
+        ie7 = /msie\s7.0/ig,
+        ie9 = /msie\s9.0/ig,
+        ie10 = /msie\s10/ig,
+        ie6 = /msie\s6.0/ig,
+        ff = /(firefox)/ig;
+    if (isie.test(ua)) {
+        if (ie8.test(ua) || ie6.test(ua) || ie7.test(ua)) {
+            center_tips('browserInfo');
+        }
+
+    }
+    </script>
+    <input id="dplus" type="hidden" value="false">
+    <!-- header -->
+    <!-- data-width:头部主体宽度，data-sch:是否显示搜索模块-->
+    <div id="header" data-width="1180" data-sch="false" data-bscss="true"></div>
+    <script type="text/javascript" src="http://imgcd.hexun.com/commonhead/v4.0/js/commonhead.js"></script>
+    <!-- header e -->
+<!--    <link rel="stylesheet" type="text/css" href="home/css/public.css">
+    <link rel="stylesheet" type="text/css" href="home/css/pubRight.css">
+    <link rel="stylesheet" type="text/css" href="home/css/pubStyle.css">-->
+    <div id="app">
+        <div class="main">
+            <div class="container clearfix">
+                <div class="lef">
+            <!--订单信息 s-->
+                <div class="lefBox messageMh">
+                    <div class="tit-b">
+                        <h5>订单信息</h5>
+                    </div>
+                    <div id="orders" class="message pt20 orderInfo">
+                     
+                    </div>
+                </div>
+                <!--订单信息 e-->
+            </div>
+                <div class="rig" id="js_userCenter">
+                    <user-center ref="userCenter" :login-Info="loginInfo"></user-center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <script src='http://imgcd.hexun.com/js/popup.js'></script> -->
+    <!-- <div style="display: none">
+        <script type="text/javascript" src="http://utrack.hexun.com/track/track_hx.js"></script>
+    </div> -->
+    <script type="text/javascript" src='http://imgcd.hexun.com/home/js/dist/userCenter.js'></script>
+    <script type="text/javascript">
+    UserCenter().then(function(loginInfo) {
+        // console.log(loginInfo)
+    });
+    </script>
+    <!--<script type="text/javascript" src="home/radar/js/manifest.js"></script>
+    <script type="text/javascript" src="home/radar/js/vendor.js"></script>
+    <script type="text/javascript" src="home/radar/js/index.js"></script>-->
+</body>
+
+</html>

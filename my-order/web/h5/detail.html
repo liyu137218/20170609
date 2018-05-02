@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title>订单详情</title>
+    <!--<base href="http://imgcd.hexun.com/home/orders/h5/" />-->
+	
+	<link rel="stylesheet" href="http://imgcd.hexun.com/home/h5/css/h5reset.css">
+	<link rel="stylesheet" href="http://imgcd.hexun.com/home/h5/css/style.css">
+	<script src="http://imgzq.hexun.com/commonjs/jquery.js"></script>
+	<script src="http://imgcd.hexun.com/home/js/dist/lib.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/dropload.min.css"/>
+	<script src="js/dropload.min.js"></script>
+	<script src="js/detail.js"></script>
+</head>
+<body>
+	<header class="topTit"><a class="goback" href="javascript:window.history.go(-1)"></a><p>订单详情</p><a href="javascript:void(0)" class="topbtn js_callUserCenter"></a></header>
+
+
+	<div id="orders"></div>
+	   <div id="js_userCenter">
+        <user-center ref="userCenter" :login-Info="loginInfo"></user-center>
+    </div>
+    <script type="text/javascript" src='http://imgcd.hexun.com/home/js/dist/userCenter.js'></script>
+    <script type="text/javascript">
+    UserCenter().then(function(loginInfo) {
+        // console.log(loginInfo)
+    });
+    </script>
+    <!-- <div style="display: none">
+        <script type="text/javascript" src="http://utrack.hexun.com/track/track_hx.js"></script>
+    </div> -->
+</body>
+<script>
+	
+		$(function () {
+			var _host = window.location.host;
+			var _isTest = _host.match('test') || $.trim(_host) == '' || _host.match('127.0'),
+				_host = {
+					callvipHost: "http://" + (_isTest ? "test-" : "") + "callvip.hexun.com/",
+
+				}
+
+			function GetQueryString(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+				var r = window.location.search.substr(1).match(reg);
+				if (r != null) return unescape(r[2]); return null;
+			}
+
+			var orderId = GetQueryString("orderid");
+
+			$.ajax({
+				url: _host.callvipHost + 'jsapi/order/getorderinfo',
+				type: 'get',
+				data: {
+					orderid: orderId,
+					userid: ''
+				},
+				dataType: 'jsonp',
+				success: function (res) {
+
+					var item = res.result;
+
+					var orders = '';
+					var operate = '';
+					if (item.operateName) {
+						if (item.operateUrl != '') {
+							operate = '<div class="conbox mt10">' +
+								'<dl class="orderdl clearfix">' +
+								'<dt>订单状态</dt>' +
+								'<dd><a class="a-red-btn" href="' + item.operateUrl + '">' + item.operateName + '</a></dd>' +
+								'</dl>' +
+								'</div>'
+
+								
+						}
+
+					}
+					var obj = '';
+					if (item.ispackage == 0 && item.issuborder == 0) {
+						obj = '<div class="conbox mt10">' +
+							'<dl class="orderdl clearfix">' +
+							'<dt>订购对象</dt>' +
+							'<dd>' + item.tousername + '</dd>' +
+							'</dl>' +
+							'</div>'
+					}
+					// TODO:  预付的话 未支付 有返回到期时间 怎么判断可不可以付尾款
+					var endtime = '';
+					if (item.status == 1) {
+						endtime = '<dl class="orderdl clearfix">' +
+							'<dt>到期时间</dt>' +
+							'<dd>' + item.displayEndCreatetime + '</dd>' +
+							'</dl>'
+					}
+					var isPrePayConten = ''
+					if (item.isFinalPay == 1) {
+						isPrePayConten =
+							'<dl class="orderdl clearfix">' +
+								'<dt>' +
+									'<span class="c-e50">预付款金额</span>' +
+								'</dt>' +
+								'<dd>' +
+									'<span class="c-e50">￥' + item.prepayAmount + '</span>' +
+								'</dd>' +
+							'</dl>' +
+							'<dl class="orderdl clearfix" >' +
+								'<dt>预付款优惠</dt>' +
+								'<dd>-￥' + (item.prepayCoupAmount - item.prepayAmount) + '</dd>' +
+  							'</dl >'
+					}
+					           var couponAmount = ""
+					if (item.couponAmount) {
+						couponAmount=	'<dl class="orderdl clearfix" >' +
+								'<dt>优惠券 </dt>' +
+								'<dd>-￥' + (item.couponAmount - item.prepayCoupAmount) + '</dd>' +
+    						'</dl >'
+
+					}
+
+
+
+
+					orders += '<div class="conbox">' +
+						'<dl class="orderdl clearfix">' +
+						'<dt>订单名称</dt>' +
+						'<dd style="height:4.4rem;overflow: hidden;">' + item.productname + '</dd>' +
+						'</dl>' +
+						'<dl class="orderdl clearfix">' +
+						'<dt>订单号</dt>' +
+						'<dd>' + orderId + '</dd>' +
+						'</dl>' +
+						'<dl class="orderdl clearfix">' +
+						'<dt>产品编号</dt>' +
+						'<dd>' + item.productid + '</dd>' +
+						'</dl>' +
+						'</div>' +
+						'<div class="conbox mt10">' +
+						'<dl class="orderdl clearfix">' +
+						'<dt>单价</dt>' +
+						'<dd>￥' + item.price + '</dd>' +
+						'</dl>' +
+						'<dl class="orderdl clearfix">' +
+						'<dt>产品数量</dt>' +
+						'<dd>' + item.num + '</dd>' +
+						'</dl>' +
+						'<dl class="orderdl clearfix">' +
+						'<dt>下单时间</dt>' +
+						'<dd>' + item.displayCreatetime + '</dd>' +
+						'</dl>' +
+						endtime +
+						'</div>' + obj +
+						'<div class="conbox mt10">' +
+						'<dl class="orderdl clearfix">' +
+						'<dt>总金额</dt>' +
+						'<dd>￥' + item.amount + '</dd>' +
+						'</dl>' +
+							isPrePayConten+ couponAmount+
+						'<dl class="orderdl clearfix">' +
+						'<dt>实付款</dt>' +
+						'<dd><span class="c-e50">￥' + item.shijiAmount + '</span></dd>' +
+						'</dl>' +
+						'</div>' + operate
+
+
+					$('#orders').append(orders)
+				}
+			});
+
+
+		});
+</script>
+</html>

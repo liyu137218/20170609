@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title>我的订单</title>
+	
+    <!--<base href="http://imgcd.hexun.com/home/orders/h5" />-->
+	
+	<link rel="stylesheet" href="http://imgcd.hexun.com/home/h5/css/h5reset.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="http://imgzq.hexun.com/commonjs/jquery.js"></script>
+	<script src="http://imgcd.hexun.com/home/js/dist/lib.js"></script>
+	<link rel="stylesheet" type="text/css" href="h5/css/dropload.min.css"/>
+	<script src="h5/js/dropload.min.js"></script>
+	<script src="h5/js/myorder3.js"></script>
+	<style type="text/css">
+		.a-off{
+		display: inline-block;
+		margin-right: 1.5rem;
+		width: 7rem;
+		height: 2.2rem;
+		font: 1.4rem/2.2rem 'microsoft yahei';
+		color: #999;
+		border-radius: 2.2rem;
+		border: solid 1px #999;
+		text-align: center;
+	}
+			/*关注提示弹窗*/
+.gztsBox{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background: rgba(0,0,0,.5);
+	z-index: 998;
+	display: none;
+}
+.gzts{
+	position: absolute;
+	width: 72%;
+    left: 14%;
+    top: 35%;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 16px;
+}
+.gzts h4{
+	color: #000;
+    text-align: center;
+    line-height:20px;
+    padding: 25px;
+    box-sizing: border-box;
+    font-weight: normal;
+}
+.gzts div{
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+	border-top: 1px solid #D3D3D7;
+}
+.gzts div a{
+	line-height: 40px;
+}
+.gzts div a.yes{
+	width: 49%;
+	border-right: 1px solid #d3d3d7;
+	color:#0074ff;
+}.gzts div a.fou{
+	width:50%;
+	color: #ee5050;
+}
+	</style>
+</head>
+<body>
+	<script src="http://utrack.hexun.com/dp/hexun_dplus_ver1.0.3.js" type="text/javascript"></script>
+    <input id="dplus" type="hidden" value='{"data":{"页面名称":"个人中心-订单页","所属平台":"财道社区","PLATFORM":"h5","事件名称":"页面浏览","页面类型":"列表页"}}'/>
+	<div class="gztsBox" style="display: none;">
+			<div class="gzts">
+				<h4>确定取消该订单么<span id="names"></span></h4>
+				<div>
+					<a href="javascript:void(0);" class="yes fl">是</a>
+					<a href="javascript:void(0);" class="fou fl">否</a>
+				</div>
+			</div>
+	</div>
+	<header class="topTit"><a class="goback" href="javascript:window.history.go(-1)"></a><p>我的订单</p><a href="javascript:void(0)" class="topbtn js_callUserCenter"></a></header>
+
+
+
+
+
+
+
+
+
+<!--edit TinaGao 20180424-s -->
+
+	<ul id="more"> 
+	   <li code="180409131510432421" onclick="detail(this)"> 
+
+	    <dl class="orderdl-1 mt10 clearfix"> 
+	     <dt>
+	      <span class="c-999">订单编号：180409131510432421</span>
+	     </dt>
+	     <dd>
+	      <span class="c-999">已支付</span>
+	     </dd>
+	    </dl>
+
+	    <dl class="orderdl-1 clearfix">
+	     <dt>
+	      <a class="a-order" href="javascript:void(0);"></a>
+	      <p class="f16"><a class="a-order" href="javascript:void(0);"></a><a style="text-decoration:none;color:#333;" href="javascript:void(0);" onclick="studio(this,event)">聊天室礼物</a></p>
+	      <p class="mt5"><span class="c-999 f12">2018-04-09 13:15:10</span></p>
+	     </dt>
+	     <dd>
+	      <p class="mt10 f14"><strong>￥30.00</strong></p>
+	     </dd>
+	    </dl></li>
+	   <li code="180408181208631401" onclick="detail(this)">
+	    <dl class="orderdl-1 mt10 clearfix">
+	     <dt>
+	      <span class="c-999">订单编号：180408181208631401</span>
+	     </dt>
+	     <dd>
+	      <span class="c-999">已支付</span>
+	     </dd>
+	    </dl>
+	    <dl class="orderdl-1 clearfix">
+	     <dt>
+	      <a class="a-order" href="javascript:void(0);"></a>
+	      <p class="f16"><a class="a-order" href="javascript:void(0);"></a><a style="text-decoration:none;color:#333;" href="javascript:void(0);" onclick="studio(this,event)">大雨老师1直播室</a></p>
+	      <p class="mt5"><span class="c-999 f12">2018-04-08 18:12:09</span></p>
+	     </dt>
+	     <dd>
+	      <p class="mt10 f14"><strong>￥100.00</strong></p>
+	     </dd>
+	    </dl><p class="txt-r ptb10 bgfff"><a class="a-buy" href="javascript:void(0);" url="http://test-order.hexun.com/order/web/product?productid=70294&amp;priceid=68351&amp;returnurl=http%3A%2F%2Ftest.zhibo.hexun.com%2F10086%2F&amp;belong=zhibopt&amp;fromhost=chat&amp;touserid=17168021" onclick="dpl(this,event,100)" teacherid="17168021" proname="大雨老师1直播室" productid="70294" teaname="vipdayu">再次购买</a></p></li>
+	   <li code="180408181116179381" onclick="detail(this)">
+	    <dl class="orderdl-1 mt10 clearfix">
+	     <dt>
+	      <span class="c-999">订单编号：180408181116179381</span>
+	     </dt>
+	     <dd>
+	      <span class="c-999">已支付</span>
+	     </dd>
+	    </dl>
+	    <dl class="orderdl-1 clearfix">
+	     <dt>
+	      <a class="a-order" href="javascript:void(0);"></a>
+	      <p class="f16"><a class="a-order" href="javascript:void(0);"></a><a style="text-decoration:none;color:#333;" href="javascript:void(0);" onclick="studio(this,event)">vipdayu收费测试<span class="order-sp">预付</span></a></p>
+	      <p class="mt5"><span class="c-999 f12">2018-04-08 18:11:16</span></p>
+	     </dt>
+	     <dd>
+	      <p class="mt10 f14"><strong>￥1530.00</strong></p>
+	     </dd>
+	    </dl>
+	    <p class="txt-r ptb10 bgfff"><a class="a-buy" href="javascript:void(0);" >付尾款</a></p>
+	    <p class="orderp-txt">请在有效期内使用04.01 00.00-04-02 00.00</p>
+			
+	   </li>
+	   <li code="180408172903614361" onclick="detail(this)">
+	    <dl class="orderdl-1 mt10 clearfix">
+	     <dt>
+	      <span class="c-999">订单编号：180408172903614361</span>
+	     </dt>
+	     <dd>
+	      <span class="c-999">已支付/可使用</span>
+	     </dd>
+	    </dl>
+	    <dl class="orderdl-1 clearfix">
+	     <dt>
+	      <a class="a-order" href="javascript:void(0);"></a>
+	      <p class="f16"><a class="a-order" href="javascript:void(0);"></a><a style="text-decoration:none;color:#333;" href="javascript:void(0);" onclick="studio(this,event)">我的vip直播室1<span class="order-sp">尾款</span></a></p>
+	      <p class="mt5"><span class="c-999 f12">2018-04-08 17:29:04</span></p>
+	     </dt>
+	     <dd>
+	      <p class="mt10 f14"><strong>￥400.00</strong></p>
+	     </dd>
+	    </dl><p class="txt-r ptb10 bgfff"><a class="a-buy" href="javascript:void(0);" url="http://test-order.hexun.com/order/web/product?productid=85657466&amp;priceid=68156&amp;returnurl=http%3A%2F%2Ftest.zhibo.hexun.com%2F10050%2F&amp;belong=zhibopt&amp;touserid=28214872" onclick="dpl(this,event,400)" teacherid="28214872" proname="我的vip直播室1" productid="85657466" teaname="qqcuewzabh">再次购买</a></p></li>
+	   <li code="180313154512817009" onclick="detail(this)">
+	    <dl class="orderdl-1 mt10 clearfix">
+	     <dt>
+	      <span class="c-999">订单编号：180313154512817009</span>
+	     </dt>
+	     <dd>
+	      <span class="c-999">已支付/不可用</span>
+	     </dd>
+	    </dl>
+	    <dl class="orderdl-1 clearfix">
+	     <dt>
+	      <a class="a-order" href="javascript:void(0);"></a>
+	      <p class="f16"><a class="a-order" href="javascript:void(0);"></a><a style="text-decoration:none;color:#333;" href="javascript:void(0);" onclick="studio(this,event)">财智春播直播课1</a></p>
+	      <p class="mt5"><span class="c-999 f12">2018-03-13 15:45:13</span></p>
+	     </dt>
+	     <dd>
+	      <p class="mt10 f14"><strong>￥99.90</strong></p>
+	     </dd>
+	    </dl><p class="txt-r ptb10 bgfff"><a class="a-buy" href="javascript:void(0);" url="http://test-order.hexun.com/order/web/product?productid=6689921&amp;priceid=76185&amp;touserid=19444494" onclick="dpl(this,event,99.9)" teacherid="19444494" proname="财智春播直播课1" productid="6689921" teaname="财智人生">再次购买</a></p></li>
+	    <li>
+	    	<dl class="orderdl-1 clearfix"><dt><span class="f16">子订单</span></dt><dd><span class="i-jtb i-tb-on" temp="180316150723100521" onclick="opens(this,event)"></span></dd></dl>
+	    	<ul class="orderul bgfff" style="display: block;">
+	    		<li><a style="text-decoration:none;color:#333;" href="javascript:void(0);" onclick="studio(this,event)">暴力擒大牛实战教程》系统课 培训平台套课</a></li><li><a style="text-decoration:none;color:#333;" href="javascript:void(0);" onclick="studio(this,event)">昊啟<span class="order-sp">预付</span></a></li><li><a style="text-decoration:none;color:#333;" href="javascript:void(0);" onclick="studio(this,event)">昊啟</a></li>
+	    	</ul>
+	    </li>
+	   <li code="170728124540148181" onclick="detail(this)">
+	    <dl class="orderdl-1 mt10 clearfix">
+	     <dt>
+	      <span class="c-999">订单编号：170728124540148181</span>
+	     </dt>
+	     <dd>
+	      <span class="c-999">未支付</span>
+	     </dd>
+	    </dl>
+	    <dl class="orderdl-1 clearfix">
+	     <dt>
+	      <a class="a-order" href="javascript:void(0);"></a>
+	      <p class="f16"><a class="a-order" href="javascript:void(0);"></a><a style="text-decoration:none;color:#333;" href="javascript:void(0);" onclick="studio(this,event)">微信推送测试产品</a></p>
+	      <p class="mt5"><span class="c-999 f12">2017-07-28 12:45:40</span></p>
+	     </dt>
+	     <dd>
+	      <p class="mt10 f14"><strong>￥18.80</strong></p>
+	     </dd>
+	    </dl><p class="txt-r ptb10 bgfff"><a class="a-off" href="javascript:void(0);" code="170728124540148181" onclick="cancelorder(this,event);">取消</a><a class="a-buy" href="javascript:void(0);" url="http://test-order.hexun.com/order/web/continuepay?orderid=170728124540148181" onclick="dup(this,event,18.8)" teacherid="1037523" proname="微信推送测试产品" productid="4300001" teaname="和讯首席投顾">去付款</a></p></li>
+	 </ul>
+
+
+<!--edit TinaGao 20180424-s -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div id="Not" style="margin-top: 10px;display: none;" class="txt-c noGz"><p><img src="http://imgcd.hexun.com/home/images/tip-pic.png" style="width: 100px;"></p>
+		<p id="Not" style="text-align: center; color: gray; padding: 5px;">亲~暂时没有订单哦~</p>
+	</div>
+	<!--<p id="Not" style="display: none; background: rgb(238, 238, 238); text-align: center; color: gray; padding: 5px;">亲~暂时没有订单哦~</p>-->
+	<div id="js_userCenter">
+        <user-center ref="userCenter" :login-Info="loginInfo"></user-center>
+    </div>
+    <script type="text/javascript" src='http://imgcd.hexun.com/home/js/dist/userCenter.js'></script>
+    <script type="text/javascript">
+    UserCenter().then(function(loginInfo) {
+        // console.log(loginInfo)
+    });
+    </script>
+    <!-- <div style="display: none">
+        <script type="text/javascript" src="http://utrack.hexun.com/track/track_hx.js"></script>
+    </div> -->
+    <div style="display:none">
+        <script type="text/javascript" src="http://utrack.hexun.com/track/track_hx.js"></script>
+    </div>
+    <script src="http://px.hexun.com/js/DPlus.js" type="text/javascript"></script>
+</body>
+</html>
